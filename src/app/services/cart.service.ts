@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TitleModel } from '../models/titleModel.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -13,6 +14,11 @@ const httpOptions = {
 })
 export class CartService {
   orderList: TitleModel[] = [];
+  baseUrl = environment.url;
+
+  private resultSubject = new BehaviorSubject<string>('');
+  result$ = this.resultSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getOrderList() {
@@ -29,5 +35,11 @@ export class CartService {
     );
     return this.orderList;
   }
-  saveOrder() {}
+  saveOrder(titles: TitleModel[]): Observable<string> {
+    const url = `${this.baseUrl}/Order`;
+    this.http.post<string>(url, titles, httpOptions).subscribe((value) => {
+      this.resultSubject.next(value);
+    });
+    return this.result$;
+  }
 }
