@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TitleModel } from 'src/app/models/titleModel.model';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -10,6 +11,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent implements OnInit {
   orderList!: TitleModel[];
   total: number = 0;
+  response!: Observable<String>;
   constructor(private cartService: CartService) {}
   ngOnInit(): void {
     this.orderList = this.cartService.getOrderList();
@@ -24,5 +26,8 @@ export class CartComponent implements OnInit {
 
   setTotal() {
     this.orderList.map((e) => (this.total = this.total + e.price));
+  }
+  onSave() {
+    this.response = this.cartService.saveOrder(this.orderList);
   }
 }

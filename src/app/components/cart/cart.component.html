@@ -1,5 +1,7 @@
+<a routerLink="/authors">Back to all authors</a>
 <div class="container">
     <h1>Your Order List</h1>
     <app-order-item *ngFor="let book of orderList" [book]="book" (remove)="deleteItem(book)"></app-order-item>
     <h3>total: {{total}}</h3>
+    <button class="btn" (click)="onSave()">Save Order</button>
 </div>
