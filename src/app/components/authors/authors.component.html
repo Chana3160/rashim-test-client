@@ -1,0 +1,6 @@
+<h1>Choose author to see his books:</h1>
+<a routerLink="/authors/cart">Cart</a>
+<input type="text" name="search" [(ngModel)]="searchText" placeholder="Enter name author">
+<div class="container">
+    <app-author-item *ngFor="let author of authors | async | filter:searchText" [author]="author"></app-author-item>
+</div>

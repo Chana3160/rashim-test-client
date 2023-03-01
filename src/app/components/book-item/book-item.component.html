@@ -1,0 +1,6 @@
+<div class="book">
+    <h3>{{book.title1}}</h3>
+    <h4> Price: {{book.price}}</h4>
+    <p>publish date: {{book.pubdate | date: "MM/dd/yy"}}</p>
+    <button class="btn" (click)="onAdd(book)">Add To Cart</button>
+</div>

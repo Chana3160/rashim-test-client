@@ -1,0 +1,12 @@
+<div>
+
+    <h1 class="fulName">{{author.auFname}} {{author.auLname}}</h1>
+    <h2 class="info">Address: {{author.state}}, {{author.city}}, {{author.address}}</h2>
+    <h2 class="info">Phone: {{author.phone}}</h2>
+    <a routerLink="/authors/cart">Cart</a>
+    <button class="btn" (click)="sort('title1')">Sort By Name</button>
+    <button class="btn" (click)="sort('pubdate')">Sort By Date</button>
+    <div class="container">
+        <app-book-item *ngFor="let book of books | async | orderBy: key: reverse" [book]="book"></app-book-item>
+    </div>
+</div>
